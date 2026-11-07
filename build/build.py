@@ -95,23 +95,29 @@ STORY_PHOTOS = [
     dict(photo="pastrami-burger-stack.jpg", alt="Pastrami burger on the counter", credit="g"),
 ]
 
+# Mosaic tiles. pos = (column, row, columns spanned, rows spanned) on the 6 x 6
+# desktop grid; the pieces are laid out by hand so they fill it exactly. On
+# phones the tiles flow into two columns using only the spans.
 GALLERY = [
-    dict(photo="hero-storefront-square.jpg", alt="The front of Sno-White Drive-In with the sign over the door", cap="The front on Center St", credit="gb"),
-    dict(photo="menu-cover.jpg", alt="The blue Sno-White menu cover with shakes, sundaes and a double cheeseburger", cap="The menu cover", credit="y"),
-    dict(photo="pastrami-burger-fries.jpg", alt="Pastrami burger with crinkle fries on a tray", cap="Pastrami burger and fries", credit="y"),
-    dict(photo="counter.jpg", alt="The order counter with red tile and the menu boards above", cap="The counter", credit="y"),
-    dict(photo="crinkle-fries-2.jpg", alt="Crinkle cut fries in a paper boat", cap="Crinkle cut, every time", credit="g"),
-    dict(photo="dining-room.jpg", alt="Dining room with red booths and tile", cap="Red booths, red tile", credit="g"),
-    dict(photo="pastrami-burger-stack.jpg", alt="Pastrami burger stacked with cheese and lettuce", cap="Pastrami, stacked", credit="g"),
-    dict(photo="cheeseburger-grilled-cheese.jpg", alt="Cheeseburger, fries, ranch and a grilled cheese on a red tray", cap="Burger, fries, ranch, grilled cheese", credit="y"),
-    dict(photo="menu-treats.jpg", alt="The dessert menu: sundaes, slushies, milkshakes, cones and the dollar menu", cap="The freezer side of the menu", credit="y"),
-    dict(photo="walk-up.jpg", alt="Walking up to the door under the Sno-White sign", cap="Walk up or drive through", credit="g"),
-    dict(photo="from-the-road.jpg", alt="Sno-White Drive-In seen from across Center Street with the tall sign", cap="From across Center St", credit="g"),
-    dict(photo="double-cheeseburger.jpg", alt="Double cheeseburger unwrapped", cap="Double cheeseburger", credit="y"),
-    dict(photo="menu-boards.jpg", alt="Backlit menu boards at the drive-thru window", cap="The drive-thru boards", credit="y"),
-    dict(photo="counter-wide.jpg", alt="Wide view of the counter and front door", cap="Inside, looking at the door", credit="g"),
-    dict(photo="dining-room-2.jpg", alt="Booths along the window", cap="Booths by the window", credit="y"),
-    dict(photo="pastrami-chili-cheese-fries.jpg", alt="Pastrami chili cheese fries in a takeout box", cap="Pastrami chili cheese fries", credit="g"),
+    dict(photo="hero-storefront-square.jpg", alt="The front of Sno-White Drive-In with the sign over the door", cap="The front on Center St", credit="gb", pos=(1, 1, 2, 2)),
+    dict(photo="menu-cover.jpg", alt="The blue Sno-White menu cover with shakes, sundaes and a double cheeseburger", cap="The menu cover", credit="y", pos=(3, 1, 1, 2)),
+    dict(photo="pastrami-burger-fries.jpg", alt="Pastrami burger with crinkle fries on a tray", cap="Pastrami burger and fries", credit="y", pos=(4, 1, 1, 2)),
+    dict(photo="counter.jpg", alt="The order counter with red tile and the menu boards above", cap="The counter", credit="y", pos=(5, 1, 2, 1)),
+    dict(photo="crinkle-fries-2.jpg", alt="Crinkle cut fries in a paper boat", cap="Crinkle cut, every time", credit="g", pos=(5, 2, 1, 2)),
+    dict(photo="pastrami-burger-stack.jpg", alt="Pastrami burger stacked with cheese and lettuce", cap="Pastrami, stacked", credit="g", pos=(6, 2, 1, 2)),
+    dict(photo="dining-room.jpg", alt="Dining room with red booths and tile", cap="Red booths, red tile", credit="g", pos=(1, 3, 2, 2)),
+    dict(photo="cheeseburger-grilled-cheese.jpg", alt="Cheeseburger, fries, ranch and a grilled cheese on a red tray", cap="Burger, fries, ranch, grilled cheese", credit="y", pos=(3, 3, 2, 1)),
+    dict(photo="double-cheeseburger.jpg", alt="Double cheeseburger unwrapped", cap="Double cheeseburger", credit="y", pos=(3, 4, 1, 1)),
+    dict(photo="menu-treats.jpg", alt="The dessert menu: sundaes, slushies, milkshakes, cones and the dollar menu", cap="The freezer side of the menu", credit="y", pos=(4, 4, 1, 2)),
+    dict(photo="from-the-road.jpg", alt="Sno-White Drive-In seen from across Center Street with the tall sign", cap="From across Center St", credit="g", pos=(5, 4, 2, 1)),
+    dict(photo="walk-up.jpg", alt="Walking up to the door under the Sno-White sign", cap="Walk up or drive through", credit="g", pos=(1, 5, 1, 2)),
+    dict(photo="dining-room-2.jpg", alt="Booths along the window", cap="Booths by the window", credit="y", pos=(2, 5, 1, 1)),
+    dict(photo="menu-boards.jpg", alt="Backlit menu boards at the drive-thru window", cap="The drive-thru boards", credit="y", pos=(3, 5, 1, 2)),
+    dict(photo="pastrami-chili-cheese-fries.jpg", alt="Pastrami chili cheese fries in a takeout box", cap="Pastrami chili cheese fries", credit="g", pos=(5, 5, 1, 2)),
+    dict(photo="storefront-2017.jpg", alt="The storefront after the rebuild", cap="The rebuilt front", credit="y", pos=(6, 5, 1, 1)),
+    dict(photo="corndog.jpg", alt="A hand-dipped corn dog", cap="Corn dog", credit="y", pos=(2, 6, 1, 1)),
+    dict(photo="grilled-cheese.jpg", alt="A grilled cheese sandwich, golden on the outside", cap="Grilled cheese", credit="g", pos=(4, 6, 1, 1)),
+    dict(photo="double-cheeseburger-meal.jpg", alt="Double cheeseburger in paper with crinkle fries", cap="Double cheeseburger meal", credit="y", pos=(6, 6, 1, 1)),
 ]
 
 REVIEW = dict(
@@ -207,11 +213,12 @@ def menu_cards():
 def gallery_cards():
     out = []
     for i, g in enumerate(GALLERY):
+        c, r, cs, rs = g["pos"]
+        cls = {(2, 2): "s22", (2, 1): "s21", (1, 2): "s12"}.get((cs, rs), "")
         out.append(
-            '<figure class="card shot" data-i="%d"><div class="card-media">'
-            '<img loading="lazy" src="%s" alt="%s" title="%s"></div>'
+            '<figure class="%s" style="--i:%d;--a:%d / %d / span %d / span %d"><img loading="lazy" src="%s" alt="%s" title="%s">'
             '<figcaption>%s</figcaption></figure>'
-            % (i, ASSET_BASE + "photos/" + g["photo"], html.escape(g["alt"]), CREDIT[g["credit"]], html.escape(g["cap"]))
+            % (cls, i, r, c, rs, cs, ASSET_BASE + "photos/" + g["photo"], html.escape(g["alt"]), CREDIT[g["credit"]], html.escape(g["cap"]))
         )
     return "\n".join(out)
 

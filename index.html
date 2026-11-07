@@ -297,8 +297,25 @@ h2 .script{font-size:.8em;color:var(--red);position:relative;top:-.06em;padding:
 .card-body{padding:14px 16px 18px}
 .card-body h3{font-size:22px;margin-bottom:6px;color:var(--blue)}
 .card-body p{font-size:14px;color:var(--mute);line-height:1.45}
-.shot .card-media{aspect-ratio:1}
-figcaption{padding:12px 16px 16px;font-size:14px;font-weight:500}
+/* ---------- gallery mosaic: tiles of different sizes that lock together like a puzzle ---------- */
+.gnote{max-width:34ch;font-size:15px;color:var(--mute);text-align:right}
+.mosaic{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:150px;grid-auto-flow:dense;gap:8px;margin-top:6px}
+.mosaic figure{grid-area:var(--a);margin:0;position:relative;overflow:hidden;border-radius:12px;background:var(--sky);box-shadow:0 14px 30px -22px rgba(22,33,58,.6);opacity:0;transform:scale(.86) rotate(-2deg);transition:opacity .5s var(--ease),transform .6s var(--ease)}
+.mosaic figure::after{content:"";position:absolute;inset:0;border-radius:12px;box-shadow:inset 0 0 0 3px var(--snow);pointer-events:none}
+.in .mosaic figure{opacity:1;transform:none;transition-delay:calc(var(--i)*55ms)}
+.mosaic img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease)}
+.mosaic figure:hover img{transform:scale(1.05)}
+.mosaic figcaption{position:absolute;left:0;right:0;bottom:0;padding:34px 12px 10px;font-family:var(--head);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:linear-gradient(180deg,transparent,rgba(22,33,58,.75));opacity:0;transition:opacity .35s}
+.mosaic figure:hover figcaption,.mosaic figure:focus-within figcaption{opacity:1}
+@media (hover:none){.mosaic figcaption{opacity:1}}
+@media (max-width:900px){
+  .mosaic{grid-template-columns:repeat(2,1fr);grid-auto-rows:130px;gap:6px}
+  .mosaic figure{grid-area:auto}
+  .mosaic .s22{grid-column:span 2;grid-row:span 2}.mosaic .s21{grid-column:span 2}.mosaic .s12{grid-row:span 2}
+  .gnote{text-align:left}
+  .gallery .railhead{flex-direction:column;align-items:start;gap:10px}
+}
+@media (prefers-reduced-motion:reduce){.mosaic figure{opacity:1;transform:none;transition:none}.mosaic img{transition:none}}
 .tile{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:radial-gradient(circle at 50% 30%,#fff 0,transparent 55%),repeating-linear-gradient(135deg,transparent 0 22px,rgba(27,63,143,.06) 22px 23px),var(--sky)}
 .tile .pz{width:50%;filter:drop-shadow(0 14px 18px rgba(22,33,58,.3));transition:transform .5s var(--ease)}
 .card:hover .tile .pz{transform:rotate(-8deg) scale(1.04)}
@@ -504,27 +521,29 @@ footer .by a{text-decoration:none;font-weight:600}
   <div class="wrap">
     <div class="railhead">
       <div><p class="label">Gallery</p><h2>From the <span class="script">window.</span></h2></div>
-      <div class="arrows"><button type="button" data-prev aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><button type="button" data-next aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button></div>
+      <p class="gnote">Pieces of a Taft afternoon: the front, the counter, the booths and what comes out of the window.</p>
     </div>
-    <div class="rail" data-rail aria-label="Photos">
-      <figure class="card shot" data-i="0"><div class="card-media"><img loading="lazy" src="https://tastetrak.github.io/Snow-White-Taft/assets/photos/hero-storefront-square.jpg" alt="The front of Sno-White Drive-In with the sign over the door" title="From the business's Google Business Profile"></div><figcaption>The front on Center St</figcaption></figure>
-<figure class="card shot" data-i="1"><div class="card-media"><img loading="lazy" src="https://tastetrak.github.io/Snow-White-Taft/assets/photos/menu-cover.jpg" alt="The blue Sno-White menu cover with shakes, sundaes and a double cheeseburger" title="Customer photo on Yelp"></div><figcaption>The menu cover</figcaption></figure>
-<figure class="card shot" data-i="2"><div class="card-media"><img loading="lazy" src="https://tastetrak.github.io/Snow-White-Taft/assets/photos/pastrami-burger-fries.jpg" alt="Pastrami burger with crinkle fries on a tray" title="Customer photo on Yelp"></div><figcaption>Pastrami burger and fries</figcaption></figure>
-<figure class="card shot" data-i="3"><div class="card-media"><img loading="lazy" src="https://tastetrak.github.io/Snow-White-Taft/assets/photos/counter.jpg" alt="The order counter with red tile and the menu boards above" title="Customer photo on Yelp"></div><figcaption>The counter</figcaption></figure>
-<figure class="card shot" data-i="4"><div class="card-media"><img loading="lazy" src="https://tastetrak.github.io/Snow-White-Taft/assets/photos/crinkle-fries-2.jpg" alt="Crinkle cut fries in a paper boat" title="Customer photo on Google"></div><figcaption>Crinkle cut, every time</figcaption></figure>
-<figure class="card shot" data-i="5"><div class="card-media"><img loading="lazy" src="https://tastetrak.github.io/Snow-White-Taft/assets/photos/dining-room.jpg" alt="Dining room with red booths and tile" title="Customer photo on Google"></div><figcaption>Red booths, red tile</figcaption></figure>
-<figure class="card shot" data-i="6"><div class="card-media"><img loading="lazy" src="https://tastetrak.github.io/Snow-White-Taft/assets/photos/pastrami-burger-stack.jpg" alt="Pastrami burger stacked with cheese and lettuce" title="Customer photo on Google"></div><figcaption>Pastrami, stacked</figcaption></figure>
-<figure class="card shot" data-i="7"><div class="card-media"><img loading="lazy" src="https://tastetrak.github.io/Snow-White-Taft/assets/photos/cheeseburger-grilled-cheese.jpg" alt="Cheeseburger, fries, ranch and a grilled cheese on a red tray" title="Customer photo on Yelp"></div><figcaption>Burger, fries, ranch, grilled cheese</figcaption></figure>
-<figure class="card shot" data-i="8"><div class="card-media"><img loading="lazy" src="https://tastetrak.github.io/Snow-White-Taft/assets/photos/menu-treats.jpg" alt="The dessert menu: sundaes, slushies, milkshakes, cones and the dollar menu" title="Customer photo on Yelp"></div><figcaption>The freezer side of the menu</figcaption></figure>
-<figure class="card shot" data-i="9"><div class="card-media"><img loading="lazy" src="https://tastetrak.github.io/Snow-White-Taft/assets/photos/walk-up.jpg" alt="Walking up to the door under the Sno-White sign" title="Customer photo on Google"></div><figcaption>Walk up or drive through</figcaption></figure>
-<figure class="card shot" data-i="10"><div class="card-media"><img loading="lazy" src="https://tastetrak.github.io/Snow-White-Taft/assets/photos/from-the-road.jpg" alt="Sno-White Drive-In seen from across Center Street with the tall sign" title="Customer photo on Google"></div><figcaption>From across Center St</figcaption></figure>
-<figure class="card shot" data-i="11"><div class="card-media"><img loading="lazy" src="https://tastetrak.github.io/Snow-White-Taft/assets/photos/double-cheeseburger.jpg" alt="Double cheeseburger unwrapped" title="Customer photo on Yelp"></div><figcaption>Double cheeseburger</figcaption></figure>
-<figure class="card shot" data-i="12"><div class="card-media"><img loading="lazy" src="https://tastetrak.github.io/Snow-White-Taft/assets/photos/menu-boards.jpg" alt="Backlit menu boards at the drive-thru window" title="Customer photo on Yelp"></div><figcaption>The drive-thru boards</figcaption></figure>
-<figure class="card shot" data-i="13"><div class="card-media"><img loading="lazy" src="https://tastetrak.github.io/Snow-White-Taft/assets/photos/counter-wide.jpg" alt="Wide view of the counter and front door" title="Customer photo on Google"></div><figcaption>Inside, looking at the door</figcaption></figure>
-<figure class="card shot" data-i="14"><div class="card-media"><img loading="lazy" src="https://tastetrak.github.io/Snow-White-Taft/assets/photos/dining-room-2.jpg" alt="Booths along the window" title="Customer photo on Yelp"></div><figcaption>Booths by the window</figcaption></figure>
-<figure class="card shot" data-i="15"><div class="card-media"><img loading="lazy" src="https://tastetrak.github.io/Snow-White-Taft/assets/photos/pastrami-chili-cheese-fries.jpg" alt="Pastrami chili cheese fries in a takeout box" title="Customer photo on Google"></div><figcaption>Pastrami chili cheese fries</figcaption></figure>
+    <div class="mosaic" aria-label="Photos">
+      <figure class="s22" style="--i:0;--a:1 / 1 / span 2 / span 2"><img loading="lazy" src="https://tastetrak.github.io/Snow-White-Taft/assets/photos/hero-storefront-square.jpg" alt="The front of Sno-White Drive-In with the sign over the door" title="From the business's Google Business Profile"><figcaption>The front on Center St</figcaption></figure>
+<figure class="s12" style="--i:1;--a:1 / 3 / span 2 / span 1"><img loading="lazy" src="https://tastetrak.github.io/Snow-White-Taft/assets/photos/menu-cover.jpg" alt="The blue Sno-White menu cover with shakes, sundaes and a double cheeseburger" title="Customer photo on Yelp"><figcaption>The menu cover</figcaption></figure>
+<figure class="s12" style="--i:2;--a:1 / 4 / span 2 / span 1"><img loading="lazy" src="https://tastetrak.github.io/Snow-White-Taft/assets/photos/pastrami-burger-fries.jpg" alt="Pastrami burger with crinkle fries on a tray" title="Customer photo on Yelp"><figcaption>Pastrami burger and fries</figcaption></figure>
+<figure class="s21" style="--i:3;--a:1 / 5 / span 1 / span 2"><img loading="lazy" src="https://tastetrak.github.io/Snow-White-Taft/assets/photos/counter.jpg" alt="The order counter with red tile and the menu boards above" title="Customer photo on Yelp"><figcaption>The counter</figcaption></figure>
+<figure class="s12" style="--i:4;--a:2 / 5 / span 2 / span 1"><img loading="lazy" src="https://tastetrak.github.io/Snow-White-Taft/assets/photos/crinkle-fries-2.jpg" alt="Crinkle cut fries in a paper boat" title="Customer photo on Google"><figcaption>Crinkle cut, every time</figcaption></figure>
+<figure class="s12" style="--i:5;--a:2 / 6 / span 2 / span 1"><img loading="lazy" src="https://tastetrak.github.io/Snow-White-Taft/assets/photos/pastrami-burger-stack.jpg" alt="Pastrami burger stacked with cheese and lettuce" title="Customer photo on Google"><figcaption>Pastrami, stacked</figcaption></figure>
+<figure class="s22" style="--i:6;--a:3 / 1 / span 2 / span 2"><img loading="lazy" src="https://tastetrak.github.io/Snow-White-Taft/assets/photos/dining-room.jpg" alt="Dining room with red booths and tile" title="Customer photo on Google"><figcaption>Red booths, red tile</figcaption></figure>
+<figure class="s21" style="--i:7;--a:3 / 3 / span 1 / span 2"><img loading="lazy" src="https://tastetrak.github.io/Snow-White-Taft/assets/photos/cheeseburger-grilled-cheese.jpg" alt="Cheeseburger, fries, ranch and a grilled cheese on a red tray" title="Customer photo on Yelp"><figcaption>Burger, fries, ranch, grilled cheese</figcaption></figure>
+<figure class="" style="--i:8;--a:4 / 3 / span 1 / span 1"><img loading="lazy" src="https://tastetrak.github.io/Snow-White-Taft/assets/photos/double-cheeseburger.jpg" alt="Double cheeseburger unwrapped" title="Customer photo on Yelp"><figcaption>Double cheeseburger</figcaption></figure>
+<figure class="s12" style="--i:9;--a:4 / 4 / span 2 / span 1"><img loading="lazy" src="https://tastetrak.github.io/Snow-White-Taft/assets/photos/menu-treats.jpg" alt="The dessert menu: sundaes, slushies, milkshakes, cones and the dollar menu" title="Customer photo on Yelp"><figcaption>The freezer side of the menu</figcaption></figure>
+<figure class="s21" style="--i:10;--a:4 / 5 / span 1 / span 2"><img loading="lazy" src="https://tastetrak.github.io/Snow-White-Taft/assets/photos/from-the-road.jpg" alt="Sno-White Drive-In seen from across Center Street with the tall sign" title="Customer photo on Google"><figcaption>From across Center St</figcaption></figure>
+<figure class="s12" style="--i:11;--a:5 / 1 / span 2 / span 1"><img loading="lazy" src="https://tastetrak.github.io/Snow-White-Taft/assets/photos/walk-up.jpg" alt="Walking up to the door under the Sno-White sign" title="Customer photo on Google"><figcaption>Walk up or drive through</figcaption></figure>
+<figure class="" style="--i:12;--a:5 / 2 / span 1 / span 1"><img loading="lazy" src="https://tastetrak.github.io/Snow-White-Taft/assets/photos/dining-room-2.jpg" alt="Booths along the window" title="Customer photo on Yelp"><figcaption>Booths by the window</figcaption></figure>
+<figure class="s12" style="--i:13;--a:5 / 3 / span 2 / span 1"><img loading="lazy" src="https://tastetrak.github.io/Snow-White-Taft/assets/photos/menu-boards.jpg" alt="Backlit menu boards at the drive-thru window" title="Customer photo on Yelp"><figcaption>The drive-thru boards</figcaption></figure>
+<figure class="s12" style="--i:14;--a:5 / 5 / span 2 / span 1"><img loading="lazy" src="https://tastetrak.github.io/Snow-White-Taft/assets/photos/pastrami-chili-cheese-fries.jpg" alt="Pastrami chili cheese fries in a takeout box" title="Customer photo on Google"><figcaption>Pastrami chili cheese fries</figcaption></figure>
+<figure class="" style="--i:15;--a:5 / 6 / span 1 / span 1"><img loading="lazy" src="https://tastetrak.github.io/Snow-White-Taft/assets/photos/storefront-2017.jpg" alt="The storefront after the rebuild" title="Customer photo on Yelp"><figcaption>The rebuilt front</figcaption></figure>
+<figure class="" style="--i:16;--a:6 / 2 / span 1 / span 1"><img loading="lazy" src="https://tastetrak.github.io/Snow-White-Taft/assets/photos/corndog.jpg" alt="A hand-dipped corn dog" title="Customer photo on Yelp"><figcaption>Corn dog</figcaption></figure>
+<figure class="" style="--i:17;--a:6 / 4 / span 1 / span 1"><img loading="lazy" src="https://tastetrak.github.io/Snow-White-Taft/assets/photos/grilled-cheese.jpg" alt="A grilled cheese sandwich, golden on the outside" title="Customer photo on Google"><figcaption>Grilled cheese</figcaption></figure>
+<figure class="" style="--i:18;--a:6 / 6 / span 1 / span 1"><img loading="lazy" src="https://tastetrak.github.io/Snow-White-Taft/assets/photos/double-cheeseburger-meal.jpg" alt="Double cheeseburger in paper with crinkle fries" title="Customer photo on Yelp"><figcaption>Double cheeseburger meal</figcaption></figure>
     </div>
-    <div class="seg" aria-hidden="true"></div>
   </div>
 </section>
 
