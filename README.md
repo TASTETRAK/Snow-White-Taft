@@ -6,7 +6,7 @@ Production single-page site for **Sno-White Drive-In**, 825 Center St, Taft, CA 
 - `index.html` is self-contained (CSS inlined, logo SVGs embedded as data URIs, vanilla JS) and can be pasted into BobCRM as-is.
 - Regenerate it with `python3 build/build.py`. All facts, menu items, gallery entries and links live in `build/build.py`; the markup lives in `build/template.html`.
 - The absolute URLs that must change when the domain moves are listed in a comment at the top of `index.html` and come from `SITE_URL` in `build/build.py`.
-- Order, review and directions links are set once on `<body data-order-url data-review-url data-directions-url>`; a few lines of JS fill every Order, Review and Directions link from them. There is no online ordering, so every Order button dials the shop (the printed menu says "we take call in orders").
+- Order, review and directions links are set once on `<body data-order-url data-review-url data-directions-url>`; a few lines of JS fill every Order, Review and Directions link from them. There is no online ordering link yet, so every "Order Ahead" button dials the shop; set `order_url` in `build/build.py` when one exists.
 
 ## Layout
 
@@ -56,7 +56,7 @@ Photos in `assets/photos/` (24 files, plus 14 square tiles in `assets/photos/str
 1. Current prices. The printed menu on Yelp is from 2018 and MenuPix shows newer names and prices (Giant, Double K.O., Animal Fries), so only those five dollar amounts are on the page; the other cards say "Combo available", "4 sizes" and so on. A photo of the current menu boards fixes this in `MENU` in `build/build.py`.
 2. The real logo file, to replace the three redrawn SVGs in `assets/`.
 3. Confirm the Friday hours (2 PM–10 PM, per Google, Yelp and the menu cover's "Fridays only from 2 PM–10 PM").
-4. Confirm the phone number (661) 763-1732 and whether call-in orders are still taken; if they add online ordering, set `order_url` in `build/build.py`.
+4. Confirm the phone number (661) 763-1732. The buttons say "Pickup & delivery available" at the owner's request; Google lists delivery as not offered, so confirm who delivers and add the ordering link to `order_url` in `build/build.py`.
 5. The Facebook page URL. The page uses the one Google lists (`facebook.com/Sno-White-Drive-In-108122955896707`); a second page id (`100065307137418`) also turns up in search.
 6. An Instagram handle, if one exists.
 7. Original, full-resolution food photos, especially of the Giant, Double K.O., Animal Fries, shakes, freezes and sundaes, which are the drawn placeholder tiles in the menu rail.
